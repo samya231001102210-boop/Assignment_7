@@ -1,9 +1,11 @@
 
 import { useTasks } from "../context/TaskContext";
 import { Link } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 const Dashboard = () => {
   const { tasks } = useTasks();
+  const { user, token } = useAuth();
 
   const total = tasks.length;
   const raised = tasks.filter((t) => t.status === "Raised").length;
@@ -14,6 +16,16 @@ const Dashboard = () => {
     <div>
       <h1>Dashboard</h1>
       <p>Welcome to your Task Manager Dashboard.</p>
+
+      <div className="session-card">
+        <h3>Session (JWT Simulation)</h3>
+        <p>
+          Logged in as <strong>{user.username}</strong>
+        </p>
+        <p>Issued: {new Date(user.iat * 1000).toLocaleString()}</p>
+        <p>Expires: {new Date(user.exp * 1000).toLocaleString()}</p>
+        <code className="token">{token}</code>
+      </div>
 
       <div className="stats-container">
         <div className="stat-card">

@@ -2,7 +2,7 @@ import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 const MainLayout = () => {
-  const { logout } = useAuth();
+  const { user, logout } = useAuth();
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -30,7 +30,7 @@ const MainLayout = () => {
       <main className="main-content">
         <header className="topbar">
           <h3>My Task Manager</h3>
-          <span>Welcome, Admin!</span>
+          <span>Welcome, {user?.username}!</span>
         </header>
 
         <div className="page-content">
